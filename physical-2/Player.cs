@@ -73,7 +73,6 @@ public partial class Player : CharacterBody2D
         catch (TimeoutException)
         {
         }
-
         Velocity = inputDirection * Speed;
         MoveAndSlide();
     }
