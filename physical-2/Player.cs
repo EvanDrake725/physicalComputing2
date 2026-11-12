@@ -6,6 +6,9 @@ public partial class Player : CharacterBody2D
 {
     SerialPort serialPort;
     bool hasHeardFromArduino = false;
+     public float RotationSpeed = 5.0f;
+
+    private float _targetRotation = 0.0f;
 
     public override void _Ready()
     {
@@ -55,19 +58,20 @@ public partial class Player : CharacterBody2D
 				else
 				{
 					int value = int.Parse(serialMessage);
-					if (value <= prevValue) { 
-						inputDirection.X += 1;
-						prevValue=value;
-					} else if (value >=prevValue) { 
-						inputDirection.X -= 1;
-						prevValue=value;
-					}
+					if (value < prevValue)
+                    {
+                        RotationDegrees+=10;
+                    }
+                    else if (value > prevValue)
+                    {
+                        RotationDegrees-=10;
+                    }
+                    prevValue = value;
 				}                
             }
         }
         catch (TimeoutException)
         {
-            // Ignore serial read timeouts
         }
 
         Velocity = inputDirection * Speed;
