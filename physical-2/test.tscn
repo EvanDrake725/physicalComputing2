@@ -1,8 +1,74 @@
 [gd_scene format=3 uid="uid://nhiexvf8qvsx"]
 
 [ext_resource type="PackedScene" uid="uid://b0tdtwtcg2hx8" path="res://Actors/player.tscn" id="1_37kl0"]
+[ext_resource type="PackedScene" uid="uid://7dqcl40mfrkg" path="res://Actors/bullet_p.tscn" id="2_6uqi0"]
+[ext_resource type="Texture2D" uid="uid://cy10rd2pfc8q5" path="res://icon.svg" id="3_6uqi0"]
+[ext_resource type="PackedScene" uid="uid://70wvr6phhxnx" path="res://Actors/enemy.tscn" id="3_g14j6"]
+[ext_resource type="Script" uid="uid://b2opllx38cvgk" path="res://briefcase.gd" id="5_vbegm"]
+[ext_resource type="Script" uid="uid://bg85x7mqvd7bi" path="res://van.gd" id="6_ehkex"]
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_6uqi0"]
+vertices = PackedVector2Array(671.60156, 464.60156, 1671.7969, 946.02344, -261.0078, 949.96875, 364.39844, 464.60156, -262.97656, -242.14063, 364.39844, 157.39844, 1648.1875, -269.85156, 671.60156, 157.39844)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(3, 2, 4, 5), PackedInt32Array(5, 4, 6, 7), PackedInt32Array(6, 1, 0, 7)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-273, -252, -271, 960, 1682, 956, 1658, -280)])
+agent_radius = 100.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6uqi0"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_xersf"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_00tp4"]
+size = Vector2(44.185623, 25.719706)
 
 [node name="Node2D" type="Node2D" unique_id=229450794]
 
-[node name="Player" parent="." unique_id=473144941 instance=ExtResource("1_37kl0")]
+[node name="Player" parent="." unique_id=473144941 groups=["Player"] instance=ExtResource("1_37kl0")]
+position = Vector2(1075, 533)
+BulletScene = ExtResource("2_6uqi0")
+
+[node name="Enemy" parent="." unique_id=84690240 instance=ExtResource("3_g14j6")]
+
+[node name="NavigationRegion2D" type="NavigationRegion2D" parent="." unique_id=1677878651]
+navigation_polygon = SubResource("NavigationPolygon_6uqi0")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="NavigationRegion2D" unique_id=286501443]
 position = Vector2(518, 311)
+collision_layer = 3
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="NavigationRegion2D/StaticBody2D" unique_id=862366511]
+scale = Vector2(14.360002, 14.360002)
+shape = SubResource("RectangleShape2D_6uqi0")
+
+[node name="Icon" type="Sprite2D" parent="NavigationRegion2D/StaticBody2D" unique_id=413701232]
+position = Vector2(-2, 0)
+scale = Vector2(2.1999989, 2.1999989)
+texture = ExtResource("3_6uqi0")
+
+[node name="Briefcase" type="Area2D" parent="." unique_id=1784757616]
+position = Vector2(1907, 496)
+script = ExtResource("5_vbegm")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Briefcase" unique_id=398607190]
+scale = Vector2(12.959999, 12.959999)
+shape = SubResource("CircleShape2D_xersf")
+
+[node name="Icon" type="Sprite2D" parent="Briefcase" unique_id=876240247]
+position = Vector2(-6, -5)
+texture = ExtResource("3_6uqi0")
+
+[node name="Van" type="Area2D" parent="." unique_id=67215507]
+position = Vector2(1810, 133)
+script = ExtResource("6_ehkex")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Van" unique_id=1742331701]
+position = Vector2(-127.70007, 30.200027)
+scale = Vector2(10.559995, 10.559995)
+shape = SubResource("RectangleShape2D_00tp4")
+
+[node name="Icon" type="Sprite2D" parent="Van" unique_id=140138272]
+position = Vector2(-129, 20)
+texture = ExtResource("3_6uqi0")
+
+[connection signal="body_entered" from="Briefcase" to="Briefcase" method="_on_body_entered"]
+[connection signal="body_entered" from="Van" to="Van" method="_on_body_entered"]

@@ -6,9 +6,8 @@ public partial class Player : CharacterBody2D
 {
     SerialPort serialPort;
     bool hasHeardFromArduino = false;
-     public float RotationSpeed = 5.0f;
-
-    private float _targetRotation = 0.0f;
+    [Export]
+    public PackedScene BulletScene { get; set; }
 
     public override void _Ready()
     {
@@ -24,13 +23,19 @@ public partial class Player : CharacterBody2D
 
     [Export]
     public int Speed { get; set; } = 300;
-    public int Health=10;
+    public int Health=6;
     public int prevValue=0;
+    public bool briefcase=false;
 
 
     public override void _PhysicsProcess(double delta)
     {
         Vector2 inputDirection = Vector2.Zero;
+        if (Health<=0)
+        {
+            serialPort.Close();
+            GetTree().ChangeSceneToFile("res://Title.tscn");
+        }
         if (serialPort == null || !serialPort.IsOpen)
         return;
         try
@@ -55,6 +60,13 @@ public partial class Player : CharacterBody2D
 				{
 					inputDirection.X -= 1;
 				}
+                else if (serialMessage == "ACTIVE")
+                {
+                    Area2D bullet = BulletScene.Instantiate<Area2D>();
+                    bullet.GlobalPosition = GlobalPosition;
+                    bullet.GlobalRotation = GlobalRotation;
+                    GetTree().CurrentScene.AddChild(bullet);
+                }
 				else
 				{
 					int value = int.Parse(serialMessage);

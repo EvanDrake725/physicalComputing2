@@ -1,0 +1,33 @@
+[gd_scene format=3 uid="uid://70wvr6phhxnx"]
+
+[ext_resource type="Script" uid="uid://dqs2bj6ox6pr3" path="res://enemy.gd" id="1_rracr"]
+[ext_resource type="Texture2D" uid="uid://cy10rd2pfc8q5" path="res://icon.svg" id="2_fd1gt"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_8uh7m"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ykrsh"]
+
+[node name="Enemy" type="CharacterBody2D" unique_id=84690240 groups=["Enemy"]]
+collision_layer = 2
+collision_mask = 2
+script = ExtResource("1_rracr")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=888047222]
+scale = Vector2(9.560001, 9.560001)
+shape = SubResource("CircleShape2D_8uh7m")
+
+[node name="Icon" type="Sprite2D" parent="." unique_id=2097233719]
+position = Vector2(1, 2)
+texture = ExtResource("2_fd1gt")
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="." unique_id=908510202]
+avoidance_enabled = true
+
+[node name="Area2D" type="Area2D" parent="." unique_id=202298734]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=986463436]
+scale = Vector2(23.999998, 23.999998)
+shape = SubResource("CircleShape2D_ykrsh")
+
+[connection signal="velocity_computed" from="NavigationAgent2D" to="." method="_on_navigation_agent_2d_velocity_computed"]
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
