@@ -20,4 +20,5 @@ func _process(delta: float) -> void:
 func _on_body_entered(body: Node2D) -> void:
 	if body.is_in_group("Enemy"):
 		body.Health_Loss()
+		self.queue_free()
 	pass # Replace with function body.

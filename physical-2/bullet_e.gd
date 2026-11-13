@@ -20,4 +20,7 @@ func _process(delta: float) -> void:
 func _on_body_entered(body: Node2D) -> void:
 	if body.is_in_group("Player"):
 		body.Health-=1
+		self.queue_free()
+	else:
+		self.queue_free()
 	pass # Replace with function body.
