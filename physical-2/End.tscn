@@ -1,3 +1,21 @@
 [gd_scene format=3 uid="uid://cxtopq85acwvc"]
 
+[ext_resource type="Texture2D" uid="uid://dvchwo53m7k8r" path="res://Actors/Screenshot 2026-11-13 103520.png" id="1_lm0ep"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lry8e"]
+atlas = ExtResource("1_lm0ep")
+
 [node name="End" type="Node2D" unique_id=966549404]
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=64557137]
+position = Vector2(580.49994, 331.5)
+scale = Vector2(0.4639839, 0.5282868)
+texture = SubResource("AtlasTexture_lry8e")
+
+[node name="Label" type="Label" parent="." unique_id=2059976693]
+offset_left = 283.0
+offset_top = 145.0
+offset_right = 417.0
+offset_bottom = 168.0
+scale = Vector2(4.2400007, 4.2400007)
+text = "Thanks 4 playing!"

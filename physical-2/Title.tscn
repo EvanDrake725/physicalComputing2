@@ -1,6 +1,25 @@
 [gd_scene format=3 uid="uid://c5d1qgmrn4adw"]
 
 [ext_resource type="Script" uid="uid://d24guv4mcmw70" path="res://Title.cs" id="1_c0dwi"]
+[ext_resource type="Texture2D" uid="uid://bxumf1ck7ynhr" path="res://Actors/Screenshot 2026-11-13 102615.png" id="2_ax32a"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_quvj1"]
+atlas = ExtResource("2_ax32a")
 
 [node name="Title" type="Node2D" unique_id=802455483]
 script = ExtResource("1_c0dwi")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=485227331]
+modulate = Color(1, 0.40392157, 1, 1)
+position = Vector2(585, 318.25)
+scale = Vector2(0.47692308, 0.4805054)
+texture = SubResource("AtlasTexture_quvj1")
+
+[node name="TextEdit" type="Label" parent="." unique_id=25151325]
+offset_left = 305.0
+offset_top = 27.999996
+offset_right = 437.0
+offset_bottom = 77.0
+scale = Vector2(3.4799957, 3.4799957)
+text = "The Muncie Hitm
+an"

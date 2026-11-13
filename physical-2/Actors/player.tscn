@@ -1,9 +1,12 @@
 [gd_scene format=3 uid="uid://b0tdtwtcg2hx8"]
 
 [ext_resource type="Script" uid="uid://cdjh6563erxqd" path="res://Player.cs" id="1_y2lmi"]
-[ext_resource type="Texture2D" uid="uid://cy10rd2pfc8q5" path="res://icon.svg" id="2_xk7p5"]
+[ext_resource type="Texture2D" uid="uid://cqr135uvoj7t1" path="res://Actors/realmario.webp" id="2_y2lmi"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8uh7m"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xk7p5"]
+atlas = ExtResource("2_y2lmi")
 
 [node name="Player" type="CharacterBody2D" unique_id=473144941]
 script = ExtResource("1_y2lmi")
@@ -14,6 +17,7 @@ shape = SubResource("RectangleShape2D_8uh7m")
 
 [node name="Icon" type="Sprite2D" parent="." unique_id=500647601]
 position = Vector2(-2, -4)
-texture = ExtResource("2_xk7p5")
+scale = Vector2(0.39999926, 0.39999926)
+texture = SubResource("AtlasTexture_xk7p5")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=459839330]
